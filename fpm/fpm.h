@@ -3,25 +3,20 @@
 
 #include "fcgi_stdio.h"
 #include <stdlib.h>
+#include <pthread.h>
 #pragma comment(lib, "libfcgi.lib")
 
-#include "../logger/log.h"
+#include "../autoloader/autoloader.h"
 
 class Fpm {
     public:
-        void setPort(std::string port);
-        void setlistenQueue(int listenQueueBacklog);
-
         void runServer();
         Fpm();
 
-    protected:
-        void configure();
-
     private:
-        std::string port;           //Задаем номер порта TCP
-        int  listenQueueBacklog;    //Глубина стека запросов
-
+        static void * runThread(void *a);
+        
+        int socketId;
         FCGX_Stream *in, *out, *err;
         FCGX_ParamArray envp;
         FCGX_Request request;

@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-I/usr/local/include -L/usr/local/lib -lfcgi
 LDFLAGS=
-SOURCES=main.cpp fpm/fpm.cpp logger/log.cpp
+SOURCES=main.cpp fpm/fpm.cpp logger/log.cpp conf/config.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=site
 

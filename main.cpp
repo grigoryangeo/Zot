@@ -1,5 +1,4 @@
 #include "fpm/fpm.h"
-#include "logger/log.h"
 
 int main(int argc, char* const argv[])
 {
