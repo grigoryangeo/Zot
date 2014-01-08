@@ -7,6 +7,7 @@
 #pragma comment(lib, "libfcgi.lib")
 
 #include "../autoloader/autoloader.h"
+#include "../web/AppKernel.h"
 
 class Fpm {
     public:

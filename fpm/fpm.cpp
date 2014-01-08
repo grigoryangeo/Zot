@@ -43,32 +43,14 @@ void* Fpm::runThread(void *a)
 
         //получить значение переменной
         server_name = FCGX_GetParam("SERVER_NAME", request.envp);
-        
+
+        AppKernel *appKernel = new AppKernel();
+
         //вывести все HTTP-заголовки (каждый заголовок с новой строки)
-        FCGX_PutS("Content-type: text/html\r\n", request.out);
-        //между заголовками и телом ответа нужно вывести пустую строку
-        FCGX_PutS("\r\n", request.out);
-        //вывести тело ответа (например - html-код веб-страницы)
-        FCGX_PutS("<html>\r\n", request.out);
-        FCGX_PutS("<head>\r\n", request.out);
-        FCGX_PutS("<title>FastCGI Hello! (multi-threaded C, fcgiapp library)</title>\r\n", request.out);
-        FCGX_PutS("</head>\r\n", request.out);
-        FCGX_PutS("<body>\r\n", request.out);
-        FCGX_PutS("<h1>FastCGI Hello! (multi-threaded C, fcgiapp library)</h1>\r\n", request.out);
-        FCGX_PutS("<p>Request accepted from host <i>", request.out);
-        FCGX_PutS(server_name ? server_name : "?", request.out);
-        FCGX_PutS("</i></p>\r\n", request.out);
-        FCGX_PutS("</body>\r\n", request.out);
 
-        //char* content=get_web_data();
-        //FCGX_PutS(content, request.out);
+        FCGX_FPrintF(request.out, appKernel->Handle());
+//       FCGX_PutS(appKernel->Handle();, request.out);
 
-        FCGX_PutS("</html>\r\n", request.out);
-
-
-        //"заснуть" - имитация многопоточной среды
-        //sleep(0.5);
-        
         //закрыть текущее соединение
         FCGX_Finish_r(&request);
 
