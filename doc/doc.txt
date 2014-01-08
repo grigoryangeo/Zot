@@ -1,0 +1,9 @@
+Используется библиотека libfcgi.lib - http://www.fastcgi.com/drupal/node/5
+
+
+Нагрузочное тестирование:
+ab -kc 10 -t 20 http://127.0.0.1:8080/
+ab -n 100 -c 10 -t 5 http://127.0.0.1:8080/
+
+ab -n 1000 -c 10 plt/test/test.php
+ab -n 1000 -c 10  http://127.0.0.1:8080/
